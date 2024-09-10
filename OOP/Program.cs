@@ -252,3 +252,28 @@ class Program
 }
 */
 
+//EXCEPTION HANDLING
+class Program
+{
+
+    static void Main(string[] args)
+    {
+		try
+		{
+			int num1 = 10;
+			int num2 = 0;
+			int result = num1 / num2;
+			Console.WriteLine(result);
+		}
+		catch (DivideByZeroException ex)
+		{
+			Console.WriteLine("Error: Division by zero is not allowed.");
+            Console.WriteLine($"Exception Message: {ex.Message}");
+		}
+		finally
+		{
+            Console.WriteLine("This block always executes, whether an exception occurred or not");
+
+        }
+    }
+}
