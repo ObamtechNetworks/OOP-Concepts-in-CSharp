@@ -231,3 +231,22 @@ interface IAnimal
 {
     void Speak(); // Method signature (no implementation)
 }
+
+// Class implementing the interface
+class Cat : IAnimal
+{
+    public void Speak()
+    {
+        Console.WriteLine("The cat meows");
+    }
+}
+
+// Program entry point
+class Program
+{
+    static void Main(string[] args)
+    {
+        IAnimal myCat = new Cat();
+        myCat.Speak(); // Outputs: The cat meows
+    }
+}
