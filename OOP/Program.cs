@@ -225,7 +225,7 @@ class Program
 // INTERFACE CONCEPT:
 /** An interface defines a contract that classes must follow.
  * A class can implement multiple interfaces, which enables a form of multiple inheritance.
- **/
+
 
 interface IAnimal
 {
@@ -250,3 +250,5 @@ class Program
         myCat.Speak(); // Outputs: The cat meows
     }
 }
+*/
+
