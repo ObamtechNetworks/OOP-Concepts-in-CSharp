@@ -1,4 +1,77 @@
-﻿/**
+﻿
+
+
+
+// ENCAPSULATION CONCEPT
+
+
+
+
+
+
+
+
+// INTERFACE CONCEPT:
+
+
+
+
+
+
+// -> Define class program
+/*
+class Program
+{
+    // function to take input from the user
+    public static string userInput()
+    {
+        string input = Console.ReadLine();
+        return input;
+    }
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter any number to divide 100 by number");
+        string input = userInput();
+        
+        if (String.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("You didn't Enter a value!");
+            return;
+        }
+
+        // extend program
+
+        try
+        {
+            float convertInput = float.Parse(input);
+            float divide100By = 100 / convertInput;
+            Console.WriteLine($"Your result is: 100 / {input} ==> {divide100By}");
+        }
+        catch (Exception ext)
+        {
+            if (ext is FormatException)
+            {
+                Console.WriteLine($"Error: Value must be a number");
+            }
+
+            if (ext is DivideByZeroException)
+            {
+                Console.WriteLine($"Error: Cannot Divide by Zero {ext.Message}");
+            }
+
+            if (ext is NullReferenceException)
+            {
+                Console.WriteLine("Invalid Input");
+            }
+        }
+    }
+}
+*/
+
+using System.Linq.Expressions;
+
+/**
 class Car
 {
     // Define Attributes
@@ -32,9 +105,7 @@ class Program
         myCar.DisplayCarInfo();
     }
 }
-*/
-
-/**
+*//**
 // USing Constructors
 
 class Car
@@ -70,10 +141,7 @@ class Program
         
     }
 }
-*/
-
-// ENCAPSULATION CONCEPT
-/** Encapsulation is about controlling access to class members (fields and methods).
+*//** Encapsulation is about controlling access to class members (fields and methods).
  * This is achieved using access modifiers like private, public, and protected.
 class Car(string brand, string model, int year)
 {
@@ -109,9 +177,7 @@ class Program
 
     }
 }
-*/
-
-/**
+*//**
 
 // INHERITANCE CONCEPT
 
@@ -156,9 +222,7 @@ class Program
         myCar.DisplayCarDetails();
     }
 }
-*/
-
-/**
+*//**
 
 // POLYMORPHISM CONCEPT
 class Animal
@@ -191,9 +255,7 @@ class Program
         someDog.Sound(); // outputs the dog barks
     }
 }
-*/
-
-/** Abstraction Concept:
+*//** Abstraction Concept:
  * Abstraction hides the complex implementation details of a class and shows only the essential features.
 In C#, you can achieve abstraction using abstract classes and interfaces.
 
@@ -220,10 +282,7 @@ class Program
         myShape.Draw(); // Outputs: Drawing a circle
     }
 }
-*/
-
-// INTERFACE CONCEPT:
-/** An interface defines a contract that classes must follow.
+*//** An interface defines a contract that classes must follow.
  * A class can implement multiple interfaces, which enables a form of multiple inheritance.
 
 
@@ -250,8 +309,7 @@ class Program
         myCat.Speak(); // Outputs: The cat meows
     }
 }
-*/
-
+*//**
 //EXCEPTION HANDLING
 class Program
 {
@@ -274,6 +332,95 @@ class Program
 		{
             Console.WriteLine("This block always executes, whether an exception occurred or not");
 
+        }
+    }
+}
+*//** HANDS DateOnly EXERCISE: Exception HANDLING
+ * 
+ * 
+ * Write a program that takes a number from the user and divides 100 by that number.
+ * Handle cases where the user inputs zero (division by zero error) and handle cases
+ * where the user inputs a non-integer value (formatting error).
+--------------------------------------------------------------------------------------
+Extend the above program to define and throw a custom exception if the number entered
+is greater than 100, with a message "Number too large for this operation."
+ * **/
+
+// extend program ===> custom Exception
+public class CustomException : Exception
+{
+    public CustomException() 
+    {
+
+    }
+    public CustomException(string message) : base(message)
+    {
+
+    }
+}
+
+class Program
+{
+    // function to take input from the user
+    public static string userInput()
+    {
+        string input = Console.ReadLine();
+        return input;
+    }
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter any number to divide 100 by number");
+        string input = userInput();
+
+        if (String.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("You didn't Enter a value!");
+            return;
+        }
+
+
+        try
+        {
+
+            // extend program
+            if (float.TryParse(input, out float convertInput))
+            {
+                if (convertInput > 100)
+                {
+                    throw new CustomException("Your value is too large!");
+                }
+                else if (convertInput == 0)
+                {
+                    throw new DivideByZeroException("Cannot divide by zero");
+                }
+
+                // perform division
+                float divide100By = 100 / convertInput;
+                Console.WriteLine($"Your result is: 100 / {input} ==> {divide100By}");
+            }
+
+            else
+            {
+                Console.WriteLine($"Error: Value must be a number");
+                return;
+            }
+        }
+        catch (CustomException ex)
+        {
+            Console.WriteLine($"Custom Exception: {ex.Message}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("Program finished. Thank you for using the program.");
         }
     }
 }
